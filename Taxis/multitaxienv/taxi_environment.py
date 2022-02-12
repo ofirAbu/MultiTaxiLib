@@ -7,7 +7,7 @@ import gym
 from gym.utils import seeding
 import numpy as np
 from Taxis.multitaxienv.config import TAXI_ENVIRONMENT_REWARDS, BASE_AVAILABLE_ACTIONS, ALL_ACTIONS_NAMES
-from gym.spaces import MultiDiscrete
+from gym.spaces import MultiDiscrete, Box
 
 from Taxis.multitaxienv.taxi_utils import rendering_utils, basic_utils, actions_utils, \
     observation_utils, reward_utils
@@ -148,7 +148,7 @@ class TaxiEnv(gym.Env):
     def __init__(self, _=0, num_taxis: int = 1, num_passengers: int = 1, max_fuel: list = None,
                  domain_map: list = MAP, taxis_capacity: list = None, collision_sensitive_domain: bool = False,
                  fuel_type_list: list = None, option_to_stand_by: bool = False, view_len: int = 2,
-                 rewards_table: Dict = TAXI_ENVIRONMENT_REWARDS):
+                 rewards_table: Dict = TAXI_ENVIRONMENT_REWARDS, observation_type: str = 'symbolic'):
         """
         Args:
             num_taxis: number of taxis in the domain
@@ -245,7 +245,9 @@ class TaxiEnv(gym.Env):
         for dim in self.vector_observation_dims:
             self.max_dim *= dim
 
-        self.observation_space = MultiDiscrete(self.vector_observation_dims)
+        self.observation_space = MultiDiscrete(self.vector_observation_dims) if observation_type == 'symbolic' else Box(
+            low=0, high=255, shape=(self.view_len, self.view_len))
+        self.observation_type = observation_type
         # self.observation_space = gym.spaces.Discrete(self.max_dim)
 
         self.bounded = False
@@ -381,8 +383,15 @@ class TaxiEnv(gym.Env):
         for i, taxi_id in enumerate(self.taxis_names):
             # observations[taxi_id] = self.change_observation_from_vector_to_number(observation_utils.get_status_vector_observation(self.state, taxi_id,
             #                                                                         self.taxis_names, self.num_taxis))
-            observations[taxi_id] = observation_utils.get_status_vector_observation(
-                self.state, taxi_id, self.taxis_names, self.num_taxis)
+            if self.observation_type == 'symbolic':
+                observations[taxi_id] = observation_utils.get_status_vector_observation(
+                    self.state, taxi_id, self.taxis_names, self.num_taxis)
+            else:
+                observations[taxi_id] = observation_utils.get_image_obs_by_agent_id(agent_id=i, state=self.state,
+                                                                                    num_taxis=self.num_taxis,
+                                                                                    collided=self.collided,
+                                                                                    view_len=self.view_len,
+                                                                                    domain_map=self.desc)
         return observations
 
     def _add_custom_dropoff_for_passengers(self) -> (list, list):
@@ -629,8 +638,17 @@ class TaxiEnv(gym.Env):
         for i, taxi_id in enumerate(action_dict.keys()):
             # obs[taxi_id] = self.change_observation_from_vector_to_number(observation_utils.get_status_vector_observation(self.state, taxi_id, self.taxis_names,
             #                                                                self.num_taxis))
-            obs[taxi_id] = observation_utils.get_status_vector_observation(
-                self.state, taxi_id, self.taxis_names, self.num_taxis)
+            # obs[taxi_id] = observation_utils.get_status_vector_observation(
+            #     self.state, taxi_id, self.taxis_names, self.num_taxis)
+            if self.observation_type == 'symbolic':
+                obs[taxi_id] = observation_utils.get_status_vector_observation(
+                    self.state, taxi_id, self.taxis_names, self.num_taxis)
+            else:
+                obs[taxi_id] = observation_utils.get_image_obs_by_agent_id(agent_id=i, state=self.state,
+                                                                                    num_taxis=self.num_taxis,
+                                                                                    collided=self.collided,
+                                                                                    view_len=self.view_len,
+                                                                                    domain_map=self.desc)
         return obs, \
                rewards, self.dones, {}
 
