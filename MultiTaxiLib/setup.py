@@ -10,10 +10,10 @@ from setuptools import setup
 setup(
     # Needed to silence warnings (and to be a worthwhile package)
     name='MultiTaxiEnv',
-    url='https://github.com/ofirAbu/MultiTaxiLib',
+    url='https://github.com/ofirAbu/MultiTaxiLib/tree/master/MultiTaxiLib',
     author='Ofir Abu, Howie Guo, Kevin Huang and Sarah Keren',
     # Needed to actually package something
-    packages=['multitaxienv'],
+    packages=['MultiTaxiLib'],
     # Needed for dependencies
     install_requires=['numpy','gym'],
     # *strongly* suggested for sharing
