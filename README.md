@@ -10,4 +10,5 @@ Main features:
 For example of use - skim through the [demonstration notebook](https://github.com/ofirAbu/MultiTaxiLib/blob/master/MultiTaxiLib/multitaxienv/MultiTaxiEnvDoc.ipynb).
 
 Simply installable via:
+
 <code>pip install git+https://github.com/ofirAbu/MultiTaxiLib/tree/master/MultiTaxiLib.git </code>
