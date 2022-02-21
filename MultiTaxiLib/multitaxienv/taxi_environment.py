@@ -6,13 +6,13 @@ from typing import Dict
 import gym
 from gym.utils import seeding
 import numpy as np
-from Taxis.multitaxienv.config import TAXI_ENVIRONMENT_REWARDS, BASE_AVAILABLE_ACTIONS, ALL_ACTIONS_NAMES
+from config import TAXI_ENVIRONMENT_REWARDS, BASE_AVAILABLE_ACTIONS, ALL_ACTIONS_NAMES
 from gym.spaces import MultiDiscrete, Box
 
-from Taxis.multitaxienv.taxi_utils import rendering_utils, basic_utils, actions_utils, \
+from taxi_utils import rendering_utils, basic_utils, actions_utils, \
     observation_utils, reward_utils
-from Taxis.multitaxienv.taxi_utils.rendering_utils import render
-from Taxis.multitaxienv.taxi_utils.termination_utils import get_done_dictionary
+from taxi_utils.rendering_utils import render
+from taxi_utils.termination_utils import get_done_dictionary
 
 MAP2 = [
     "+-------+",
@@ -332,7 +332,10 @@ class TaxiEnv(gym.Env):
         self.current_step = 0
         # reset taxis locations
         taxis_locations = np.array(self.coordinates)[
-                          np.random.choice(range(len(self.coordinates)), self.num_taxis, replace=False), :]
+                          np.random.choice(range(
+                              len(self.coordinates) if isinstance(self.coordinates, list) else self.coordinates.shape[
+                                  0]),
+                              self.num_taxis, replace=False), :]
         taxis_locations = basic_utils.get_array_as_list_type(taxis_locations)
         self.collided = np.zeros(self.num_taxis)
         self.bounded = False
@@ -645,10 +648,10 @@ class TaxiEnv(gym.Env):
                     self.state, taxi_id, self.taxis_names, self.num_taxis)
             else:
                 obs[taxi_id] = observation_utils.get_image_obs_by_agent_id(agent_id=i, state=self.state,
-                                                                                    num_taxis=self.num_taxis,
-                                                                                    collided=self.collided,
-                                                                                    view_len=self.view_len,
-                                                                                    domain_map=self.desc)
+                                                                           num_taxis=self.num_taxis,
+                                                                           collided=self.collided,
+                                                                           view_len=self.view_len,
+                                                                           domain_map=self.desc)
         return obs, \
                rewards, self.dones, {}
 
