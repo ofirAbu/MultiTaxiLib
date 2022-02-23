@@ -125,4 +125,5 @@ def get_image_obs_by_agent_id(agent_id: int, state: list, num_taxis: int, collid
     padded_map[view_len: view_len + rgb_map.shape[0], view_len: view_len + rgb_map.shape[1]] = rgb_map
 
     # return rgb_map[row - view_len: row + view_len + 1, col - view_len: col + view_len + 1]
-    return padded_map[row: row + 2 * view_len + 1, col: col + 2 * view_len + 1]
+    padded_map = np.array(padded_map).astype(int)
+    return padded_map[row: row + 2 * view_len + 1, col: col + 2 * view_len + 1, :]

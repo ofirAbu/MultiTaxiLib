@@ -47,7 +47,10 @@ def map2rgb(state: list, np_map: np.ndarray) -> Optional[np.array]:
     rgb_arr = np.zeros((m, n, 3), dtype=int)
     for i in range(m):
         for j in range(n):
-            rgb_arr[i, j] = COLOR_MAP[np_map[i, j]]
+            try:
+                rgb_arr[i, j] = COLOR_MAP[np_map[i, j]]
+            except KeyError:
+                rgb_arr[i, j] = COLOR_MAP[np_map[i, j].decode('utf-8')]
 
     return rgb_arr
 
