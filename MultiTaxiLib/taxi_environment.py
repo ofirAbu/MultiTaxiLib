@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# TODO - make it pip installable with 2 versions - rllib / gym
 import random
 from typing import Dict
 
@@ -133,7 +132,7 @@ class TaxiEnv(gym.Env):
     def __init__(self, _=0, num_taxis: int = 1, num_passengers: int = 1, max_fuel: list = None,
                  domain_map: list = MAP, taxis_capacity: list = None, collision_sensitive_domain: bool = False,
                  fuel_type_list: list = None, option_to_stand_by: bool = False, view_len: int = 2,
-                 rewards_table: Dict = TAXI_ENVIRONMENT_REWARDS, observation_type: str = 'symbolic'):
+                 rewards_table: Dict = TAXI_ENVIRONMENT_REWARDS, observation_type: str = 'symbolic', can_see_others: bool = False):
         """
         Args:
             num_taxis: number of taxis in the domain
@@ -145,8 +144,10 @@ class TaxiEnv(gym.Env):
             fuel_type_list: list of fuel types of each taxi
             option_to_stand_by: can taxis simply stand in place
             view_len: width and height of the observation window for a taxi
+            can_see_others: if True, taxis observations will include other taxis locations
         """
         # initializing rewards table
+        self.can_see_others = can_see_others
         if rewards_table != TAXI_ENVIRONMENT_REWARDS:
             rewards_table = TAXI_ENVIRONMENT_REWARDS.update(rewards_table)
         self.rewards_table = rewards_table
@@ -247,7 +248,6 @@ class TaxiEnv(gym.Env):
         self.np_random = None
         self.reset()
 
-    # TODO change this function when working on the status observation vector
     def _get_observation_space_list(self) -> list:
         """
         Returns a list that emebed the observation space size in each dimension.
@@ -373,7 +373,7 @@ class TaxiEnv(gym.Env):
             #                                                                         self.taxis_names, self.num_taxis))
             if self.observation_type == 'symbolic':
                 observations[taxi_id] = observation_utils.get_status_vector_observation(
-                    self.state, taxi_id, self.taxis_names, self.num_taxis)
+                    self.state, taxi_id, self.taxis_names, self.num_taxis, self.can_see_others)
             else:
                 observations[taxi_id] = observation_utils.get_image_obs_by_agent_id(agent_id=i, state=self.state,
                                                                                     num_taxis=self.num_taxis,
@@ -630,7 +630,7 @@ class TaxiEnv(gym.Env):
             #     self.state, taxi_id, self.taxis_names, self.num_taxis)
             if self.observation_type == 'symbolic':
                 obs[taxi_id] = observation_utils.get_status_vector_observation(
-                    self.state, taxi_id, self.taxis_names, self.num_taxis)
+                    self.state, taxi_id, self.taxis_names, self.num_taxis, self.can_see_others)
             else:
                 obs[taxi_id] = observation_utils.get_image_obs_by_agent_id(agent_id=i, state=self.state,
                                                                            num_taxis=self.num_taxis,

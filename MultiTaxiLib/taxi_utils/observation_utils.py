@@ -35,10 +35,12 @@ def partial_observations(state: list) -> list:
     return observations
 
 
-def get_status_vector_observation(state: list, agent_name: str, taxis_names: list, num_taxis: int) -> np.array:
+def get_status_vector_observation(state: list, agent_name: str, taxis_names: list, num_taxis: int,
+                                  can_see_others: bool = False) -> np.array:
     """
     Takes only the observation of the specified agent.
     Args:
+        can_see_others: if True - each taxi will get other taxis locations
         state: state of the domain (taxis, fuels, passengers_start_coordinates, destinations, passengers_locations)
         agent_name: observer name
         taxis_names: list of all taxis names sorted
@@ -58,6 +60,10 @@ def get_status_vector_observation(state: list, agent_name: str, taxis_names: lis
         passengers_destinations) + passengers_locations
 
     observations = taxis[agent_index].copy()
+    if can_see_others:
+        for index in range(num_taxis):
+            if index != agent_index:
+                observations += taxis[index].copy()
 
     # observations += [0, 0] * (num_taxis - 1) + [fuels[agent_index]] + [0] * (num_taxis - 1) + passengers_information
     observations += [fuels[agent_index]] + passengers_information
