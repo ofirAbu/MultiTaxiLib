@@ -7,7 +7,7 @@ Main features:
 2. Can switch between symbolic imaged observations.
 3. Can apply constraints in the shape of passengers' and fuel's capacity.
 
-For example of use - skim through the [demonstration notebook](https://github.com/ofirAbu/MultiTaxiLib/blob/master/MultiTaxiLib/multitaxienv/MultiTaxiEnvDoc.ipynb).
+For example of use - skim through the [demonstration notebook](https://github.com/ofirAbu/MultiTaxiLib/blob/master/MultiTaxiEnvDoc.ipynb).
 
 Simply installable via:
 

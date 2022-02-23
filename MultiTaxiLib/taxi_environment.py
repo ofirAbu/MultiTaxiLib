@@ -6,12 +6,12 @@ from typing import Dict
 import gym
 from gym.utils import seeding
 import numpy as np
-from multitaxienv.config import TAXI_ENVIRONMENT_REWARDS, BASE_AVAILABLE_ACTIONS, ALL_ACTIONS_NAMES
+from MultiTaxiLib.config import TAXI_ENVIRONMENT_REWARDS, BASE_AVAILABLE_ACTIONS, ALL_ACTIONS_NAMES
 from gym.spaces import MultiDiscrete, Box
 
-from multitaxienv.taxi_utils import actions_utils, observation_utils, basic_utils, reward_utils, rendering_utils
-from multitaxienv.taxi_utils.rendering_utils import render
-from multitaxienv.taxi_utils.termination_utils import get_done_dictionary
+from MultiTaxiLib.taxi_utils import actions_utils, observation_utils, basic_utils, reward_utils, rendering_utils
+from MultiTaxiLib.taxi_utils.rendering_utils import render
+from MultiTaxiLib.taxi_utils.termination_utils import get_done_dictionary
 
 MAP2 = [
     "+-------+",

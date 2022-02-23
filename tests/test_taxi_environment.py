@@ -1,4 +1,4 @@
-from multitaxienv.taxi_environment import TaxiEnv
+from MultiTaxiLib.taxi_environment import TaxiEnv
 
 
 def test__get_observation_space_list():

@@ -6,7 +6,7 @@ agent at each turn.
 The different observations functions are implemented in this file.
 """
 import numpy as np
-from multitaxienv.taxi_utils import rendering_utils
+from MultiTaxiLib.taxi_utils import rendering_utils
 
 
 def partial_observations(state: list) -> list:
