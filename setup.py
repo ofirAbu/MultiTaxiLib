@@ -12,7 +12,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'mypackage'
+NAME = 'MultiTaxiLib'
 DESCRIPTION = 'My short description for my project.'
 URL = 'https://github.com/ofirAbu/MultiTaxiLib/'
 EMAIL = 'ofir.abu@mail.huji.ac.il'
