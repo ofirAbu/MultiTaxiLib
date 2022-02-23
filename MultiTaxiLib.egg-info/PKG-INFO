@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: MultiTaxiLib
+Version: 0.1.0
+Summary: My short description for my project.
+Home-page: https://github.com/ofirAbu/MultiTaxiLib/
+Author: Ofir Abu
+Author-email: ofir.abu@mail.huji.ac.il
+License: MIT
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
+
+
+## MutliTaxiEnv
+
+The environment implemented in [MultiTaxiEnv](https://github.com/ofirAbu/MultiTaxiLib/blob/master/MultiTaxiLabProject.pdf).
+Allows for __easy to set up__ Planning and MARL experiments.
+Main features:
+1. Can control the rewards table.
+2. Can switch between symbolic imaged observations.
+3. Can apply constraints in the shape of passengers' and fuel's capacity.
+
+For example of use - skim through the [demonstration notebook](https://github.com/ofirAbu/MultiTaxiLib/blob/master/MultiTaxiLib/multitaxienv/MultiTaxiEnvDoc.ipynb).
+
+Simply installable via:
+
+<code>pip install git+https://github.com/ofirAbu/MultiTaxiLib/tree/master/MultiTaxiLib.git </code>
+
