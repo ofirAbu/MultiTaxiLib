@@ -14,16 +14,14 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = 'mypackage'
 DESCRIPTION = 'My short description for my project.'
-URL = 'https://github.com/ofirAbu/MultiTaxiLib/MultiTaxiLib'
+URL = 'https://github.com/ofirAbu/MultiTaxiLib/'
 EMAIL = 'ofir.abu@mail.huji.ac.il'
 AUTHOR = 'Ofir Abu'
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = '0.1.0'
 
 # What packages are required for this module to be executed?
-REQUIRED = ['gym', 'numpy'
-    # 'requests', 'maya', 'records',
-]
+REQUIRED = ['gym', 'numpy']
 
 # What packages are optional?
 EXTRAS = {

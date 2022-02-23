@@ -6,13 +6,12 @@ from typing import Dict
 import gym
 from gym.utils import seeding
 import numpy as np
-from config import TAXI_ENVIRONMENT_REWARDS, BASE_AVAILABLE_ACTIONS, ALL_ACTIONS_NAMES
+from multitaxienv.config import TAXI_ENVIRONMENT_REWARDS, BASE_AVAILABLE_ACTIONS, ALL_ACTIONS_NAMES
 from gym.spaces import MultiDiscrete, Box
 
-from taxi_utils import rendering_utils, basic_utils, actions_utils, \
-    observation_utils, reward_utils
-from taxi_utils.rendering_utils import render
-from taxi_utils.termination_utils import get_done_dictionary
+from multitaxienv.taxi_utils import actions_utils, observation_utils, basic_utils, reward_utils, rendering_utils
+from multitaxienv.taxi_utils.rendering_utils import render
+from multitaxienv.taxi_utils.termination_utils import get_done_dictionary
 
 MAP2 = [
     "+-------+",
@@ -54,20 +53,6 @@ orig_MAP = [
     "|X| : |X: |",
     "+---------+",
 ]
-
-
-# TODO change documentation to refer to rllib
-# TODO - Create requirements.txt
-# TODO Create another notebook for all the changes in the environment
-
-# supporting rllib and gym via this alternating variable
-# environment_type = 'rllib'
-# if environment_type == 'rllib':
-#     from ray.rllib.env import MultiAgentEnv
-#     environment_to_derive_from = MultiAgentEnv
-# else:
-#     import gym
-#     environment_to_derive_from = gym.Env
 
 
 class TaxiEnv(gym.Env):

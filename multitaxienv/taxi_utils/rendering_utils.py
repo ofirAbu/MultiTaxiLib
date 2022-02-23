@@ -4,7 +4,7 @@ This file encapsulates all relevant rendering functions and their utils (both gr
 
 from typing import Optional
 import numpy as np
-from config import COLOR_MAP
+from multitaxienv.config import COLOR_MAP
 import matplotlib.pyplot as plt
 from gym.utils import colorize
 from io import StringIO

@@ -1,7 +1,6 @@
 """
 This util file contains basic utils regarding to the domain, such as: metrics, taxis calculations, map parsing...
 """
-from typing import List
 
 import numpy as np
 
