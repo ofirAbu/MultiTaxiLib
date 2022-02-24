@@ -5,6 +5,8 @@ from typing import Dict
 import gym
 from gym.utils import seeding
 import numpy as np
+from ray import rllib
+
 from MultiTaxiLib.config import TAXI_ENVIRONMENT_REWARDS, BASE_AVAILABLE_ACTIONS, ALL_ACTIONS_NAMES
 from gym.spaces import MultiDiscrete, Box
 
@@ -54,7 +56,7 @@ orig_MAP = [
 ]
 
 
-class TaxiEnv(gym.Env):
+class TaxiEnv(rllib.env.MultiAgentEnv):
     """
     The Taxi Problem
     from "Hierarchical Reinforcement Learning with the MAXQ Value Function Decomposition"
@@ -275,6 +277,8 @@ class TaxiEnv(gym.Env):
 
         # for _ in range(self.num_taxis):
         dimensions_sizes += locations_sizes
+        if self.can_see_others:
+            dimensions_sizes += locations_sizes * (self.num_taxis - 1)
         # for _ in range(self.num_taxis):
         dimensions_sizes += fuel_size
 

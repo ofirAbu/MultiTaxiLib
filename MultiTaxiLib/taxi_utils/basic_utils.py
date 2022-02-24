@@ -68,7 +68,7 @@ def get_action_list(action_list) -> list:
     """
     if type(action_list) == int:
         return [action_list]
-    elif type(action_list) == np.int64:
+    elif type(action_list) == np.int64 or type(action_list) == np.int32:
         return [action_list]
 
     return action_list
