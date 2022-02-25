@@ -11,4 +11,4 @@ For example of use - skim through the [demonstration notebook](https://github.co
 
 Simply installable via:
 
-<code>pip install -i https://test.pypi.org/simple/ MultiTaxiLib==0.1.5 </code>
+<code>pip install -i https://test.pypi.org/simple/MultiTaxiLib==0.1.5 </code>
