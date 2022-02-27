@@ -8,7 +8,6 @@ from ray.rllib.examples.models.shared_weights_model import TorchSharedWeightsMod
 
 from ray.rllib.models import ModelCatalog
 from ray.rllib.policy.policy import PolicySpec
-from ray.rllib.utils.test_utils import check_learning_achieved
 
 
 def test__get_observation_space_list():
@@ -20,7 +19,7 @@ def test__get_observation_space_list():
 def test_reset():
     obs_image = TaxiEnv(observation_type='image').reset()
     obs_symbolic = TaxiEnv().reset()
-    assert obs_image['taxi_1'].shape == (5, 5, 3)
+    assert obs_image['taxi_1'].shape == (5, 9, 3)
     assert obs_symbolic['taxi_1'].shape == (8,)
 
 

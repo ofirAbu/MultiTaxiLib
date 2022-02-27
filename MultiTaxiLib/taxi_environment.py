@@ -134,7 +134,8 @@ class TaxiEnv(rllib.env.MultiAgentEnv):
     def __init__(self, _=0, num_taxis: int = 1, num_passengers: int = 1, max_fuel: list = None,
                  domain_map: list = MAP, taxis_capacity: list = None, collision_sensitive_domain: bool = False,
                  fuel_type_list: list = None, option_to_stand_by: bool = False, view_len: int = 2,
-                 rewards_table: Dict = TAXI_ENVIRONMENT_REWARDS, observation_type: str = 'symbolic', can_see_others: bool = False):
+                 rewards_table: Dict = TAXI_ENVIRONMENT_REWARDS, observation_type: str = 'symbolic',
+                 can_see_others: bool = False):
         """
         Args:
             num_taxis: number of taxis in the domain
@@ -304,7 +305,7 @@ class TaxiEnv(rllib.env.MultiAgentEnv):
         self.np_random, self.seed_id = seeding.np_random(seed)
         return np.array([self.seed_id])
 
-    def reset(self, coordinates=[[0, 0], [4, 4], [0, 4], [4, 0]]) -> dict:
+    def reset(self, coordinates=None) -> dict:
         """
         Reset the environment's state:
             - taxis coordinates.
@@ -318,6 +319,8 @@ class TaxiEnv(rllib.env.MultiAgentEnv):
         Returns: The reset state (dictionary as in RLlib format).
 
         """
+        coordinates = np.array([[i, j] for i in range(self.num_rows) for j in range(self.num_columns)])
+        coordinates = basic_utils.get_array_as_list_type(coordinates)
         self.current_step = 0
         # reset taxis locations
         taxis_locations = np.array(self.coordinates)[

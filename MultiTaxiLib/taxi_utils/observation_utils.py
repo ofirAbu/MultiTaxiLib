@@ -127,9 +127,9 @@ def get_image_obs_by_agent_id(agent_id: int, state: list, num_taxis: int, collid
     row = location[0] + 1
     col = location[1] * 2 + 1
 
-    padded_map = np.zeros((rgb_map.shape[0] + view_len * 2, rgb_map.shape[1] + view_len * 2, rgb_map.shape[2]))
-    padded_map[view_len: view_len + rgb_map.shape[0], view_len: view_len + rgb_map.shape[1]] = rgb_map
+    padded_map = np.zeros((rgb_map.shape[0] + view_len * 2, rgb_map.shape[1] + view_len * 4, rgb_map.shape[2]))
+    padded_map[view_len: view_len + rgb_map.shape[0], view_len * 2: view_len * 2 + rgb_map.shape[1]] = rgb_map
 
     # return rgb_map[row - view_len: row + view_len + 1, col - view_len: col + view_len + 1]
     padded_map = np.array(padded_map).astype(int)
-    return padded_map[row: row + 2 * view_len + 1, col: col + 2 * view_len + 1, :]
+    return padded_map[row: row + 2 * view_len + 1, col: col + 4 * view_len + 1, :]

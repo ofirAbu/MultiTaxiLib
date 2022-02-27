@@ -46,7 +46,7 @@ COLOR_MAP = {
     '|': [180, 180, 180],  # Grey board walls
     '+': [180, 180, 180],  # Grey board walls
     '-': [180, 180, 180],  # Grey board walls
-    ':': [0, 0, 102],  # black passes board walls
+    ':': [0, 0, 85],  # black passes board walls
     '@': [180, 180, 180],  # Grey board walls
     'P': [254, 151, 0],  # [254, 151, 0],  # Blue
     'P0': [254, 151, 0],  # [102, 51, 0],
