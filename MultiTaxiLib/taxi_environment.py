@@ -514,7 +514,7 @@ class TaxiEnv(rllib.env.MultiAgentEnv):
                     if self.dones[taxi_name]:
                         continue
                     else:
-                        rewards[taxi_name] = reward_utils.partial_closest_path_reward(self.state, 'bad_fuel')
+                        rewards[taxi_name] = reward_utils.partial_closest_path_reward(self.state, 'bad_refuel')
                         self.dones[taxi_name] = True
                         continue
 

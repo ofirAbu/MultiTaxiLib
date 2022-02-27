@@ -256,7 +256,7 @@ def update_movement_wrt_fuel(state: list, taxi: int, taxis_locations: list, want
     fuel = fuel
     taxis_locations = taxis_locations
     if fuel == 0 and (not is_infinite_fuel):
-        reward = reward_method(state, 'bad_fuel')
+        reward = reward_method(state, 'bad_refuel')
     else:
         fuel = max(0, fuel - 1)
         taxis_locations[taxi] = [wanted_row, wanted_col]
