@@ -18,10 +18,10 @@ URL = 'https://github.com/ofirAbu/MultiTaxiLib/'
 EMAIL = 'ofir.abu@mail.huji.ac.il'
 AUTHOR = 'Ofir Abu'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.1.8'
+VERSION = '0.1.0'
 
 # What packages are required for this module to be executed?
-REQUIRED = ['numpy', 'gym', 'ray', 'ray[rllib]']
+REQUIRED = ['numpy>=1.10.4', 'gym', 'ray', 'ray[rllib]']
 
 # What packages are optional?
 EXTRAS = {
